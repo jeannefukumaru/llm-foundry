@@ -104,8 +104,16 @@ callbacks:
   memory_monitor: {}
   runtime_estimator: {}
 
-loggers:
-  mlflow: {}
+loggers: 
+    mlflow: {
+      experiment_name: /Users/jeanne.choo@databricks.com/mcli
+      tracking_uri: databricks
+    }
+  
+save_interval: 10ba # How frequently to save checkpoints
+save_num_checkpoints_to_keep: 1  # Important, this cleans up checkpoints saved to DISK
+save_weights_only: True # Since we only need the weights for the next step, we can reduce the size of the checkpoint
+dist_timeout: 60000
 
 # Checkpoint to local filesystem or remote object store
 # save_interval: 500ba
@@ -115,4 +123,3 @@ loggers:
 
 # Load from local filesystem or remote object store
 # load_path: ./gpt-125m/checkpoints/latest-rank{rank}.pt
-load_path: gs://jeanne_mcli/ep0-ba100-rank0.pt
